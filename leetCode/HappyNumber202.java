@@ -1,27 +1,27 @@
+import java.util.HashSet;
+
 class HappyNumber202 {
 
     public static boolean isHappy(int n) {
+        HashSet<Integer> set = new HashSet<>();
 
-        int e = n / 10;
-        int sum = 0;
-        if (e == 0) {
-            if (n == 1)
-                return true;
-            else
-                return false;
+        while(n!=1 && !set.contains(n)){
+            set.add(n);
+            int sum = 0;
+            do {
+                sum += Math.pow(n % 10, 2);
+                n /= 10;
+            } while (n > 0);
+            // System.out.println("sum = " + sum);
+
+            n = sum;
         }
-        do {
-            sum += Math.pow(n % 10, 2);
-            n /= 10;
 
-        } while (n > 0);
-
-        return isHappy(sum);
-
+        return n == 1;
     }
 
     public static void main(String[] args) {
-        System.out.println("Output: " + isHappy(2));
+        System.out.println("Output: " + isHappy(7));
     }
 
 }
